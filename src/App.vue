@@ -1,11 +1,34 @@
 <template>
   <div id="app">
     <router-view />
+    <FooterBar />
   </div>
 </template>
 
+<script>
+import FooterBar from '@/components/FooterBar.vue'
+export default {
+  components: {
+    FooterBar,
+  },
+}
+</script>
+
 <style lang="scss">
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
+  width: 100%;
+  height: 100%;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
