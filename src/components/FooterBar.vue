@@ -1,4 +1,11 @@
-<!-- FooterBar -->
+<!--
+ * @Author: Hole 376220459@qq.com
+ * @Date: 2022-08-05 18:41:51
+ * @LastEditors: Hole 376220459@qq.com
+ * @LastEditTime: 2022-08-05 19:03:12
+ * @FilePath: \campus-sso\src\components\FooterBar.vue
+ * @Description: 页面底部
+-->
 <template>
   <div id="footer">
     <p>
@@ -27,7 +34,6 @@ export default {
   p {
     display: flex;
     justify-content: center;
-    align-items: center;
     span {
       margin-left: 5px;
     }

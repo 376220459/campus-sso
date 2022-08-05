@@ -1,15 +1,29 @@
+<!--
+ * @Author: Hole 376220459@qq.com
+ * @Date: 2022-08-04 17:54:28
+ * @LastEditors: Hole 376220459@qq.com
+ * @LastEditTime: 2022-08-05 18:54:51
+ * @FilePath: \campus-sso\src\App.vue
+ * @Description:
+-->
 <template>
   <div id="app">
-    <router-view />
+    <el-container>
+      <HeaderBar />
+      <router-view />
+    </el-container>
+
     <FooterBar />
   </div>
 </template>
 
 <script>
 import FooterBar from '@/components/FooterBar.vue'
+import HeaderBar from '@/components/HeaderBar.vue'
 export default {
   components: {
     FooterBar,
+    HeaderBar,
   },
 }
 </script>
@@ -34,18 +48,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  .el-container {
+    width: 100%;
+    height: 100%;
+    background-color: #d6faff;
+    flex-direction: column;
   }
 }
 </style>

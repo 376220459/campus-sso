@@ -1,4 +1,11 @@
-<!-- ErrorPage -->
+<!--
+ * @Author: Hole 376220459@qq.com
+ * @Date: 2022-08-05 18:16:01
+ * @LastEditors: Hole 376220459@qq.com
+ * @LastEditTime: 2022-08-05 18:17:46
+ * @FilePath: \campus-sso\src\views\ErrorPage.vue
+ * @Description: 404界面
+-->
 <template>
   <div id="error_page">
     <p class="not_found">404</p>
