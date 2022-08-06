@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 15:42:20
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-05 22:02:30
+ * @LastEditTime: 2022-08-06 17:48:12
  * @FilePath: \campus-sso\src\utils\rules.js
  * @Description: 字段验证规则
  */
@@ -48,6 +48,7 @@ const nickNameRule = [
     trigger: 'blur',
   },
 ]
+const schoolRule = [{ required: true, message: '请选择学校', trigger: 'change' }]
 const studentNumberRule = [
   { required: true, message: '请输入学号', trigger: 'blur' },
   {
@@ -72,7 +73,14 @@ const nameRule = [
     trigger: 'blur',
   },
 ]
-const verifCodeRule = [{ required: true, message: '请输入验证码', trigger: 'blur' }]
+const verifCodeRule = [
+  { required: true, message: '请输入验证码', trigger: 'blur' },
+  {
+    pattern: /^\d+$/,
+    message: '请输入合法的验证码',
+    trigger: 'blur',
+  },
+]
 
 export {
   telNumberRule,
@@ -80,6 +88,7 @@ export {
   loginPasswordRule,
   registerPasswordRule,
   nickNameRule,
+  schoolRule,
   studentNumberRule,
   jobNumberRule,
   nameRule,

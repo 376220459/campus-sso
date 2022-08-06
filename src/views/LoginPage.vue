@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 18:16:01
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-05 22:11:28
+ * @LastEditTime: 2022-08-07 00:34:12
  * @FilePath: \campus-sso\src\views\LoginPage.vue
  * @Description: 登录界面
 -->
@@ -75,24 +75,7 @@
               ></el-input>
             </el-form-item>
 
-            <el-form-item
-              label="验证码："
-              prop="verifCode"
-            >
-              <el-input
-                v-model.number="verifCodeForm.data.verifCode"
-                placeholder="请输入验证码"
-                :maxlength="6"
-              >
-                <el-button
-                  slot="append"
-                  :disabled="verifCodeForm.getVerifCodeBtn.disabled"
-                  @click="getVerifCode"
-                >
-                  {{ verifCodeForm.getVerifCodeBtn.text }}
-                </el-button>
-              </el-input>
-            </el-form-item>
+            <BaseVerifCodeInput v-model="verifCodeForm.data.verifCode" />
           </el-form>
         </el-tab-pane>
       </el-tabs>
@@ -115,11 +98,16 @@
 </template>
 
 <script>
+import BaseVerifCodeInput from '@/components/BaseVerifCodeInput.vue'
 import { telNumberRule, verifCodeRule, loginPasswordRule } from '@/utils/rules'
+import { login } from '@/apis/userAccount'
+import resHandle from '@/utils/resHandle'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'LoginPage',
 
-  props: {},
+  components: { BaseVerifCodeInput },
 
   data() {
     return {
@@ -143,60 +131,56 @@ export default {
           telNumber: telNumberRule,
           verifCode: verifCodeRule,
         },
-        getVerifCodeBtn: {
-          disabled: false,
-          text: '获取验证码',
-        },
       },
     }
   },
 
-  computed: {},
-
   methods: {
-    getVerifCode() {
-      const { getVerifCodeBtn } = this.verifCodeForm
-      getVerifCodeBtn.disabled = true
-      let count = 60
-      getVerifCodeBtn.text = `${count}秒后重发`
-
-      const countDown = () => {
-        setTimeout(() => {
-          if (count <= 0) {
-            getVerifCodeBtn.disabled = false
-            getVerifCodeBtn.text = '重新发送'
-          } else {
-            count--
-            getVerifCodeBtn.text = `${count}秒后重发`
-            countDown()
-          }
-        }, 1000)
-      }
-      countDown()
-
-      // 尽量避免使用setInterval:
-      // const interval = setInterval(() => {
-      //   if (count <= 0) {
-      //     getVerifCodeBtn.disabled = false
-      //     getVerifCodeBtn.text = '重新发送'
-      //     clearInterval(interval)
-      //   } else {
-      //     count--
-      //     getVerifCodeBtn.text = `${count}秒后重发`
-      //   }
-      // }, 1000)
-    },
+    ...mapMutations(['updateLoading']),
 
     login() {
-      this.$refs[this.loginForm].validate(valid => {
-        console.log(valid)
+      // 密码登录和验证码登录是不同的表单，这里需要靠this.loginForm做判断
+      this.$refs[this.loginForm].validate(async valid => {
+        if (valid) {
+          this.updateLoading({
+            loading: true,
+            loadingText: '正在登录，请稍等...',
+          })
+          console.log(this[this.loginForm].data)
+          const res = await login(this[this.loginForm].data)
+          resHandle(res, {
+            // 下列的回调函数，均采用箭头函数的方式声明，以便绑定this
+            sucessHandle: () => {
+              this.updateLoading({
+                loading: true,
+                loadingText: '正在跳转界面...',
+              })
+              // 此处只是提供一个跳转登录的视觉效果
+              setTimeout(() => {
+                this.updateLoading({
+                  loading: false,
+                  loadingText: '',
+                })
+                alert('跳转页面')
+              }, 3000)
+            },
+            errorHandle: () => {
+              this.updateLoading({
+                loading: false,
+                loadingText: '',
+              })
+            },
+            warningHandle: () => {
+              this.updateLoading({
+                loading: false,
+                loadingText: '',
+              })
+            },
+          })
+        }
       })
     },
   },
-
-  created() {},
-
-  mounted() {},
 }
 </script>
 

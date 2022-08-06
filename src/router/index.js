@@ -2,9 +2,9 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-04 17:54:28
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-05 20:51:44
+ * @LastEditTime: 2022-08-06 21:14:32
  * @FilePath: \campus-sso\src\router\index.js
- * @Description:
+ * @Description: 路由配置
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -21,6 +21,7 @@ const routes = [
     component: ErrorPage,
   },
   {
+    // 首页重定向到登录页面
     path: '/',
     redirect: '/login',
   },

@@ -2,7 +2,15 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-04 17:54:28
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-05 21:30:41
+ * @LastEditTime: 2022-08-06 20:12:40
+ * @FilePath: \campus-sso\src\main.js
+ * @Description:
+ */
+/*
+ * @Author: Hole 376220459@qq.com
+ * @Date: 2022-08-04 17:54:28
+ * @LastEditors: Hole 376220459@qq.com
+ * @LastEditTime: 2022-08-06 17:57:41
  * @FilePath: \campus-sso\src\main.js
  * @Description:
  */
@@ -10,6 +18,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+
 import {
   Header,
   Main,
@@ -25,6 +34,8 @@ import {
   Cascader,
   Select,
   Option,
+  Message,
+  Loading,
 } from 'element-ui'
 
 Vue.use(Header)
@@ -41,6 +52,9 @@ Vue.use(TabPane)
 Vue.use(Cascader)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Loading)
+Vue.use(Loading.directive)
+Vue.prototype.$message = Message
 
 Vue.config.productionTip = false
 
