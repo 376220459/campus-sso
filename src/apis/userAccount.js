@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-06 16:39:12
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-06 21:14:02
+ * @LastEditTime: 2022-08-07 17:24:15
  * @FilePath: \campus-sso\src\apis\userAccount.js
  * @Description: 用户账号相关接口
  */
@@ -29,4 +29,14 @@ async function login(payload) {
   }
 }
 
-export { register, login }
+// 用户修改密码接口
+async function setNewPassword(payload) {
+  try {
+    const res = await http.post('/setNewPassword', payload)
+    return res.data
+  } catch (error) {
+    return { code: 0 }
+  }
+}
+
+export { register, login, setNewPassword }

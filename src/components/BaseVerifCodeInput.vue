@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-06 14:26:34
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-06 15:19:56
+ * @LastEditTime: 2022-08-07 18:41:02
  * @FilePath: \campus-sso\src\components\BaseVerifCodeInput.vue
  * @Description: 验证码Input组件
 -->
@@ -13,9 +13,10 @@
   >
     <el-input
       :value="value"
-      @input="iptVerifCode"
       placeholder="请输入验证码"
       :maxlength="6"
+      @input="iptVerifCode"
+      @keyup.native.enter="enterKeyUp"
     >
       <el-button
         slot="append"
@@ -50,10 +51,12 @@ export default {
   computed: {},
 
   methods: {
+    // 触发input事件
     iptVerifCode(value) {
       this.$emit('input', value)
     },
 
+    // 获取验证码的回调
     getVerifCode() {
       const { getVerifCodeBtn } = this
       getVerifCodeBtn.disabled = true
@@ -87,6 +90,11 @@ export default {
       //     getVerifCodeBtn.text = `${count}秒后重发`
       //   }
       // }, 1000)
+    },
+
+    // enter键keyup事件
+    enterKeyUp() {
+      this.$emit('enterKeyUp')
     },
   },
 

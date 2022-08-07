@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 18:16:01
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-07 00:34:12
+ * @LastEditTime: 2022-08-07 21:49:46
  * @FilePath: \campus-sso\src\views\LoginPage.vue
  * @Description: 登录界面
 -->
@@ -48,6 +48,7 @@
                 v-model="passwordForm.data.password"
                 placeholder="请输入密码"
                 :maxlength="21"
+                @keyup.native.enter="login"
               ></el-input>
             </el-form-item>
           </el-form>
@@ -75,7 +76,10 @@
               ></el-input>
             </el-form-item>
 
-            <BaseVerifCodeInput v-model="verifCodeForm.data.verifCode" />
+            <BaseVerifCodeInput
+              v-model="verifCodeForm.data.verifCode"
+              @enterKeyUp="login"
+            />
           </el-form>
         </el-tab-pane>
       </el-tabs>
@@ -90,7 +94,7 @@
       </div>
 
       <div class="form-footer">
-        <el-link href="/">忘记密码</el-link>
+        <el-link href="/forget">忘记密码</el-link>
         <el-link href="/register">免费注册</el-link>
       </div>
     </div>
@@ -102,7 +106,7 @@ import BaseVerifCodeInput from '@/components/BaseVerifCodeInput.vue'
 import { telNumberRule, verifCodeRule, loginPasswordRule } from '@/utils/rules'
 import { login } from '@/apis/userAccount'
 import resHandle from '@/utils/resHandle'
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'LoginPage',
@@ -135,9 +139,14 @@ export default {
     }
   },
 
-  methods: {
-    ...mapMutations(['updateLoading']),
+  computed: {
+    ...mapState(['redirect']),
+  },
 
+  methods: {
+    ...mapMutations(['updateLoading', 'setRedirect']),
+
+    // 登录
     login() {
       // 密码登录和验证码登录是不同的表单，这里需要靠this.loginForm做判断
       this.$refs[this.loginForm].validate(async valid => {
@@ -146,7 +155,6 @@ export default {
             loading: true,
             loadingText: '正在登录，请稍等...',
           })
-          console.log(this[this.loginForm].data)
           const res = await login(this[this.loginForm].data)
           resHandle(res, {
             // 下列的回调函数，均采用箭头函数的方式声明，以便绑定this
@@ -161,7 +169,8 @@ export default {
                   loading: false,
                   loadingText: '',
                 })
-                alert('跳转页面')
+                // 跳转至请求登录来源页面（在created钩子中已经将来源页面存到了store）
+                window.location = this.redirect
               }, 3000)
             },
             errorHandle: () => {
@@ -180,6 +189,12 @@ export default {
         }
       })
     },
+  },
+
+  created() {
+    // 将来源页存储到store中
+    const { redirect } = this.$route.query
+    redirect && this.setRedirect({ redirect })
   },
 }
 </script>

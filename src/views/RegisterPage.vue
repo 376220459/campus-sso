@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 18:16:01
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-06 21:42:51
+ * @LastEditTime: 2022-08-07 19:10:58
  * @FilePath: \campus-sso\src\views\RegisterPage.vue
  * @Description: 注册界面
 -->
@@ -114,7 +114,10 @@
           :maxlength="8"
         ></el-input>
       </el-form-item>
-      <BaseVerifCodeInput v-model="registerForm.data.verifCode" />
+      <BaseVerifCodeInput
+        v-model="registerForm.data.verifCode"
+        @enterKeyUp="register"
+      />
       <el-form-item>
         <el-button
           type="primary"
@@ -195,7 +198,7 @@ export default {
         },
       },
 
-      // 因为学校数据字典庞大,需要后端接口来提供(此处是模拟后端请求的懒加载)
+      // 因为学校数据字典数据量庞大,需要后端接口来提供(此处是模拟后端请求的懒加载)
       schoolProps: {
         // 懒加载时必须设置此字段为true
         lazy: true,
@@ -264,7 +267,7 @@ export default {
 
     // 密码和确认密码的额外验证规则
     validatePassword(rule, value, callback) {
-      if (this.registerForm.data.checkPassword && value !== this.registerForm.data.checkPassword) {
+      if (this.registerForm.data.checkPassword) {
         this.$refs.registerForm.validateField('checkPassword')
       }
 
@@ -332,7 +335,6 @@ export default {
 
 <style scoped lang="scss">
 .el-main {
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;

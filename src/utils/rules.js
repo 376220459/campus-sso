@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 15:42:20
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-06 17:48:12
+ * @LastEditTime: 2022-08-07 16:56:34
  * @FilePath: \campus-sso\src\utils\rules.js
  * @Description: 字段验证规则
  */
