@@ -175,7 +175,7 @@ export default {
           const res = await setNewPassword(this.verifTelNumberForm.data)
           resHandle(res, {
             // 下列的回调函数，均采用箭头函数的方式声明，以便绑定this
-            sucessHandle: () => {
+            successHandle: () => {
               this.updateLoading({
                 loading: true,
                 loadingText: '正在跳转至修改密码...',
@@ -220,7 +220,7 @@ export default {
           })
           resHandle(res, {
             // 下列的回调函数，均采用箭头函数的方式声明，以便绑定this
-            sucessHandle: () => {
+            successHandle: () => {
               this.stepIndex += 2
               this.updateLoading({
                 loading: true,

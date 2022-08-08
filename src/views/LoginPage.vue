@@ -158,7 +158,7 @@ export default {
           const res = await login(this[this.loginForm].data)
           resHandle(res, {
             // 下列的回调函数，均采用箭头函数的方式声明，以便绑定this
-            sucessHandle: () => {
+            successHandle: () => {
               this.updateLoading({
                 loading: true,
                 loadingText: '正在跳转界面...',
