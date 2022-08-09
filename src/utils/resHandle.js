@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-06 18:02:13
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-09 21:10:55
+ * @LastEditTime: 2022-08-09 21:19:15
  * @FilePath: \campus-sso\src\utils\resHandle.js
  * @Description: 处理请求回应
  */
@@ -20,10 +20,8 @@ function resHandle(res, { successHandle = null, errorHandle = null, warningHandl
     message && Message.error('服务器开小差了，请检查网络。')
     errorHandle && errorHandle()
   } else if (code === -1) {
-    // code为-1表示页面被取消，1s后重新加载页面
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
+    // code为-1表示页面被取消，什么都不做
+    return
   } else {
     // code为其他值表示请求成功，但不符合预期
     message && Message.warning(message)
