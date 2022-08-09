@@ -14,8 +14,8 @@ async function register(payload) {
     const res = await http.post('/register', payload)
     return res.data
   } catch (error) {
-    // 返回{ code: 0 }是为了触发请求失败的回调
-    return { code: 0 }
+    // 用户手动取消加载
+    return { code: -1 }
   }
 }
 
@@ -25,7 +25,8 @@ async function login(payload) {
     const res = await http.post('/login', payload)
     return res.data
   } catch (error) {
-    return { code: 0 }
+    // 用户手动取消加载
+    return { code: -1 }
   }
 }
 
@@ -35,7 +36,8 @@ async function setNewPassword(payload) {
     const res = await http.post('/setNewPassword', payload)
     return res.data
   } catch (error) {
-    return { code: 0 }
+    // 用户手动取消加载
+    return { code: -1 }
   }
 }
 
