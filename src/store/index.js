@@ -15,15 +15,11 @@ export default new Vuex.Store({
   state: {
     loading: false,
     loadingText: '',
-    redirect: 'http://localhost:8081/',
   },
   getters: {},
   mutations: {
     updateLoading(state, { loading, loadingText = state.loadingText }) {
       ;[state.loading, state.loadingText] = [loading, loadingText]
-    },
-    setRedirect(state, { redirect }) {
-      redirect && (state.redirect = redirect)
     },
   },
   actions: {},

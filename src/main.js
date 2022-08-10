@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-04 17:54:28
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-07 18:59:32
+ * @LastEditTime: 2022-08-11 00:09:02
  * @FilePath: \campus-sso\src\main.js
  * @Description:
  */
@@ -18,6 +18,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueCookies from 'vue-cookies'
 
 import {
   Header,
@@ -59,6 +60,8 @@ Vue.use(Step)
 Vue.use(Loading.directive)
 Vue.use(Loading.directive)
 Vue.prototype.$message = Message
+
+Vue.use(VueCookies)
 
 Vue.config.productionTip = false
 

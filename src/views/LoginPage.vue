@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 18:16:01
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-07 21:49:46
+ * @LastEditTime: 2022-08-11 00:16:08
  * @FilePath: \campus-sso\src\views\LoginPage.vue
  * @Description: 登录界面
 -->
@@ -106,7 +106,7 @@ import BaseVerifCodeInput from '@/components/BaseVerifCodeInput.vue'
 import { telNumberRule, verifCodeRule, loginPasswordRule } from '@/utils/rules'
 import { login } from '@/apis/userAccount'
 import resHandle from '@/utils/resHandle'
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   name: 'LoginPage',
@@ -139,12 +139,8 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState(['redirect']),
-  },
-
   methods: {
-    ...mapMutations(['updateLoading', 'setRedirect']),
+    ...mapMutations(['updateLoading']),
 
     // 登录
     login() {
@@ -170,7 +166,7 @@ export default {
                   loadingText: '',
                 })
                 // 跳转至请求登录来源页面（在created钩子中已经将来源页面存到了store）
-                window.location = this.redirect
+                window.location = this.$cookies.get('redirect') || 'http://localhost:8081/'
               }, 3000)
             },
             errorHandle: () => {
@@ -192,9 +188,9 @@ export default {
   },
 
   created() {
-    // 将来源页存储到store中
     const { redirect } = this.$route.query
-    redirect && this.setRedirect({ redirect })
+    // 将来源页存储到cookie中(过期时间设置为0，代表关闭浏览器则失效) 不存在store中是因为刷新页面后store就会失效。
+    redirect && this.$cookies.set('redirect', redirect, '0')
   },
 }
 </script>
