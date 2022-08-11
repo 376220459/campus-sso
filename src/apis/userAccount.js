@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-06 16:39:12
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-07 17:24:15
+ * @LastEditTime: 2022-08-12 01:33:13
  * @FilePath: \campus-sso\src\apis\userAccount.js
  * @Description: 用户账号相关接口
  */
@@ -14,8 +14,10 @@ async function register(payload) {
     const res = await http.post('/register', payload)
     return res.data
   } catch (error) {
-    // 用户手动取消加载
-    return { code: -1 }
+    return {
+      code: 0,
+      error,
+    }
   }
 }
 
@@ -25,8 +27,10 @@ async function login(payload) {
     const res = await http.post('/login', payload)
     return res.data
   } catch (error) {
-    // 用户手动取消加载
-    return { code: -1 }
+    return {
+      code: 0,
+      error,
+    }
   }
 }
 
@@ -36,8 +40,10 @@ async function setNewPassword(payload) {
     const res = await http.post('/setNewPassword', payload)
     return res.data
   } catch (error) {
-    // 用户手动取消加载
-    return { code: -1 }
+    return {
+      code: 0,
+      error,
+    }
   }
 }
 
