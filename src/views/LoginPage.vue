@@ -2,7 +2,7 @@
  * @Author: Hole 376220459@qq.com
  * @Date: 2022-08-05 18:16:01
  * @LastEditors: Hole 376220459@qq.com
- * @LastEditTime: 2022-08-11 00:16:08
+ * @LastEditTime: 2022-08-23 19:19:13
  * @FilePath: \campus-sso\src\views\LoginPage.vue
  * @Description: 登录界面
 -->
@@ -166,7 +166,7 @@ export default {
                   loadingText: '',
                 })
                 // 跳转至请求登录来源页面（在created钩子中已经将来源页面存到了store）
-                window.location = this.$cookies.get('redirect') || 'http://localhost:8081/'
+                window.location = this.$cookies.get('redirect') || 'http://localhost:8080/'
               }, 3000)
             },
             errorHandle: () => {
