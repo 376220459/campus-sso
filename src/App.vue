@@ -1,15 +1,39 @@
+<!--
+ * @Author: Hole 376220459@qq.com
+ * @Date: 2022-08-04 17:54:28
+ * @LastEditors: Hole 376220459@qq.com
+ * @LastEditTime: 2022-08-07 18:54:48
+ * @FilePath: \campus-sso\src\App.vue
+ * @Description: App.vue
+-->
 <template>
-  <div id="app">
-    <router-view />
+  <div
+    id="app"
+    v-loading="loading"
+    :element-loading-text="loadingText"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)"
+  >
+    <el-container>
+      <HeaderBar />
+      <router-view />
+    </el-container>
+
     <FooterBar />
   </div>
 </template>
 
 <script>
 import FooterBar from '@/components/FooterBar.vue'
+import HeaderBar from '@/components/HeaderBar.vue'
+import { mapState } from 'vuex'
 export default {
   components: {
     FooterBar,
+    HeaderBar,
+  },
+  computed: {
+    ...mapState(['loading', 'loadingText']),
   },
 }
 </script>
@@ -34,18 +58,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  .el-container {
+    width: 100%;
+    height: 100%;
+    background-color: #d6faff;
+    flex-direction: column;
   }
 }
 </style>
